@@ -1,0 +1,4 @@
+C:\Users\chunlinDev\AppData\Local\Microsoft\VisualStudio\14.0Exp\Extensions\Company\TopLevelMenu\1.0\\TopLevelMenu.dll
+C:\Users\chunlinDev\AppData\Local\Microsoft\VisualStudio\14.0Exp\Extensions\Company\TopLevelMenu\1.0\\TopLevelMenu.pdb
+C:\Users\chunlinDev\AppData\Local\Microsoft\VisualStudio\14.0Exp\Extensions\Company\TopLevelMenu\1.0\\TopLevelMenu.pkgdef
+C:\Users\chunlinDev\AppData\Local\Microsoft\VisualStudio\14.0Exp\Extensions\Company\TopLevelMenu\1.0\\extension.vsixmanifest

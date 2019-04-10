@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CommandTable xmlns="http://schemas.microsoft.com/VisualStudio/2005-10-18/CommandTable" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <!--  This is the file that defines the actual layout and type of the commands.
+        It is divided in different sections (e.g. command definition, command
+        placement, ...), with each defining a specific set of properties.
+        See the comment before each section for more details about how to
+        use it. -->
+
+  <!--  The VSCT compiler (the tool that translates this file into the binary
+        format that VisualStudio will consume) has the ability to run a preprocessor
+        on the vsct file; this preprocessor is (usually) the C++ preprocessor, so
+        it is possible to define includes and macros with the same syntax used
+        in C++ files. Using this ability of the compiler here, we include some files
+        defining some of the constants that we will use inside the file. -->
+
+  <!--This is the file that defines the IDs for all the commands exposed by VisualStudio. -->
+  <Extern href="stdidcmd.h" />
+
+  <!--This header contains the command ids for the menus provided by the shell. -->
+  <Extern href="vsshlids.h" />
+
+
+  <!--The Commands section is where commands, menus, and menu groups are defined.
+      This section uses a Guid to identify the package that provides the command defined inside it. -->
+  <Commands package="guidTestCommand2Package">
+    <!-- Inside this section we have different sub-sections: one for the menus, another
+    for the menu groups, one for the buttons (the actual commands), one for the combos
+    and the last one for the bitmaps used. Each element is identified by a command id that
+    is a unique pair of guid and numeric identifier; the guid part of the identifier is usually
+    called "command set" and is used to group different command inside a logically related
+    group; your package should define its own command set in order to avoid collisions
+    with command ids defined by other packages. -->
+
+
+    <Menus>
+      <Menu guid="guidTestCommand2PackageCmdSet" id="TopLevelMenu" priority="0x700" type="Menu">
+        <Parent guid="guidSHLMainMenu" id="IDG_VS_MM_TOOLSADDINS" />
+        <Strings>
+          <ButtonText>TestMenu</ButtonText>
+          <CommandName>TestMenu</CommandName>
+        </Strings>
+      </Menu>
+      <Menu guid="guidTestCommand2PackageCmdSet" id="SubMenu" priority="0x0100" type="Menu">
+        <Parent guid="guidTestCommand2PackageCmdSet" id="MyMenuGroup"/>
+        <Strings>
+          <ButtonText>Sub Menu</ButtonText>
+          <CommandName>Sub Menu</CommandName>
+        </Strings>
+      </Menu>
+
+    </Menus>
+    
+    
+    <!-- In this section you can define new menu groups. A menu group is a container for
+         other menus or buttons (commands); from a visual point of view you can see the
+         group as the part of a menu contained between two lines. The parent of a group
+         must be a menu. -->
+    <Groups>
+      <Group guid="guidTestCommand2PackageCmdSet" id="MyMenuGroup" priority="0x0600">
+        <Parent guid="guidTestCommand2PackageCmdSet" id="TopLevelMenu" />
+      </Group>
+      <Group guid="guidTestCommand2PackageCmdSet" id="SubMenuGroup" priority="0x0600">
+        <Parent guid="guidTestCommand2PackageCmdSet" id="SubMenu" />
+      </Group>
+    </Groups>
+
+    <!--Buttons section. -->
+    <!--This section defines the elements the user can interact with, like a menu command or a button
+        or combo box in a toolbar. -->
+    <Buttons>
+      <!--To define a menu group you have to specify its ID, the parent menu and its display priority.
+          The command is visible and enabled by default. If you need to change the visibility, status, etc, you can use
+          the CommandFlag node.
+          You can add more than one CommandFlag node e.g.:
+              <CommandFlag>DefaultInvisible</CommandFlag>
+              <CommandFlag>DynamicVisibility</CommandFlag>
+          If you do not want an image next to your command, remove the Icon node /> -->
+      <Button guid="guidTestCommand2PackageCmdSet" id="TestCommand2Id" priority="0x0100" type="Button">
+        <Parent guid="guidTestCommand2PackageCmdSet" id="MyMenuGroup" />
+        <Icon guid="guidImages" id="bmpPic1" />
+        <Strings>
+          <ButtonText>Invoke TestCommand2</ButtonText>
+        </Strings>
+      </Button>
+      <Button guid="guidTestCommand2PackageCmdSet" id="cmdidSubMenu" priority="0x0100" type="Button">
+        <Parent guid="guidTestCommand2PackageCmdSet" id="SubMenuGroup" />
+        <Icon guid="guidImages1" id="bmpPic1" />
+        <Strings>
+          <ButtonText>Invoke SubMenu</ButtonText>
+        </Strings>
+      </Button>
+    </Buttons>
+
+    <!--The bitmaps section is used to define the bitmaps that are used for the commands.-->
+    <Bitmaps>
+      <!--  The bitmap id is defined in a way that is a little bit different from the others:
+            the declaration starts with a guid for the bitmap strip, then there is the resource id of the
+            bitmap strip containing the bitmaps and then there are the numeric ids of the elements used
+            inside a button definition. An important aspect of this declaration is that the element id
+            must be the actual index (1-based) of the bitmap inside the bitmap strip. -->
+      <Bitmap guid="guidImages" href="Resources\TestCommand2.png" usedList="bmpPic1, bmpPic2, bmpPicSearch, bmpPicX, bmpPicArrows, bmpPicStrikethrough" />
+      <Bitmap guid="guidImages1" href="Resources\SubMenu.png" usedList="bmpPic1, bmpPic2, bmpPicSearch, bmpPicX, bmpPicArrows, bmpPicStrikethrough" />
+    </Bitmaps>
+  </Commands>
+
+  <KeyBindings>
+    <KeyBinding guid="guidTestCommand2PackageCmdSet" id="TestCommand2Id" editor="guidVSStd97" key1="3" mod1="Control" />
+  </KeyBindings>
+
+
+  <Symbols>
+    <!-- This is the package guid. -->
+    <GuidSymbol name="guidTestCommand2Package" value="{7a7fd828-cf78-4721-a05b-2808d9494b31}" />
+
+    <!-- This is the guid used to group the menu commands together -->
+    <GuidSymbol name="guidTestCommand2PackageCmdSet" value="{63a74cfd-b7ba-46fa-8ce9-e9311c257dc4}">
+      <IDSymbol name="MyMenuGroup" value="0x1020" />
+      <IDSymbol name="TestCommand2Id" value="0x0100" />
+      <IDSymbol name="TopLevelMenu" value="0x1021" />
+      <!-- submenu -->
+      <IDSymbol name="SubMenuGroup" value="0x1022"/>
+      <IDSymbol name="cmdidSubMenu" value="0x1024"/>
+      <IDSymbol name="SubMenu" value="0x1100"/>
+
+    </GuidSymbol>
+
+
+
+    <!--<GuidSymbol name="guidTestCommand2PackageCmdSet1" value="{c65188e9-066d-4956-b2f0-e8fe8427aeaf}" >
+      <IDSymbol value="4128" name="MyMenuGroup" />
+      <IDSymbol name="cmdidSubMenu" value="256"/>
+    </GuidSymbol>-->
+
+    <GuidSymbol name="guidImages" value="{d28bcda5-e4a8-4a49-9e59-f34d9dde6bc0}">
+      <IDSymbol name="bmpPic1" value="1" />
+      <IDSymbol name="bmpPic2" value="2" />
+      <IDSymbol name="bmpPicSearch" value="3" />
+      <IDSymbol name="bmpPicX" value="4" />
+      <IDSymbol name="bmpPicArrows" value="5" />
+      <IDSymbol name="bmpPicStrikethrough" value="6" />
+    </GuidSymbol>
+  
+    <GuidSymbol value="{1309e16d-512b-4f39-9f24-2f67c34ac6ca}" name="guidImages1">
+      <IDSymbol name="bmpPic1" value="1" />
+      <IDSymbol name="bmpPic2" value="2" />
+      <IDSymbol name="bmpPicSearch" value="3" />
+      <IDSymbol name="bmpPicX" value="4" />
+      <IDSymbol name="bmpPicArrows" value="5" />
+      <IDSymbol name="bmpPicStrikethrough" value="6" />
+    </GuidSymbol>
+  </Symbols>
+</CommandTable>
